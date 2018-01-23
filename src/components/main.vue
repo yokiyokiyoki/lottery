@@ -220,7 +220,7 @@ function randomNum(minNum, maxNum) {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .main {
-  background-image: url(../assets/pic.jpg);
+  background-image: url(~@/assets/pic.jpg);
   background-repeat: no-repeat;
   .header {
     margin: 50px 0px;
