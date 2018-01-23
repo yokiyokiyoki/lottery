@@ -11,6 +11,7 @@
       <animated-integer :value="animateNum"></animated-integer>
       <!-- <span>正在抽奖</span>   -->
     </div>
+    
     <div class="footer">
       <el-select v-model="value" placeholder="请选择" >
         <el-option
@@ -21,8 +22,8 @@
         </el-option>
       </el-select>
       <!-- <el-input-number v-model="num" @change="handleChange" :min="1" :max="maxNum" label="抽奖人数"></el-input-number> -->
-      <el-button type="primary" plain @click='handleStart' v-if='status'>开始抽奖</el-button>
-      <el-button type="primary" plain @click='handlePause' v-else>暂停抽奖...</el-button>
+        <el-button type="primary" plain @click='handleStart' v-if='status'>开始抽奖</el-button>
+        <el-button type="primary" plain @click='handlePause' v-else>暂停抽奖...</el-button>
     </div>
   </div>
 </template>
