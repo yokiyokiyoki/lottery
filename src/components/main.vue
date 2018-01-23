@@ -30,7 +30,6 @@
 <script>
 import animatedInteger from "./animated-integer.vue";
 export default {
-  name: "main",
   components: {
     animatedInteger
   },
@@ -84,7 +83,8 @@ export default {
         3: 2,
         4: 3
       },
-      animateNum: 1
+      animateNum: 1,
+      intervalId: null
     };
   },
   methods: {
@@ -103,8 +103,12 @@ export default {
     },
     handleStart() {
       this.status = !this.status;
+      this.intervalId = setInterval(function() {
+        this.animateNum = randomNum(1, this.count);
+      }, 1);
     },
     handlePause() {
+      this.intervalId = null;
       this.status = !this.status;
       initCls.call(this, this.value);
       this.lottery(this.count, this.num);
@@ -192,6 +196,19 @@ function initCls(val) {
     this.numClass = "num-20";
   } else {
     this.numClass = "num-30";
+  }
+}
+function randomNum(minNum, maxNum) {
+  switch (arguments.length) {
+    case 1:
+      return parseInt(Math.random() * minNum + 1, 10);
+      break;
+    case 2:
+      return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+      break;
+    default:
+      return 0;
+      break;
   }
 }
 </script>
