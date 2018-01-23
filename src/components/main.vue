@@ -8,6 +8,7 @@
       <span :class="numClass" v-for='(n, index) in locCount' :key='index'>{{n}}</span>
     </div>
     <div class="content center" v-show='!status'>
+      <animated-integer :value="animateNum"></animated-integer>
       <span>正在抽奖</span>  
     </div>
     <div class="footer">
@@ -27,8 +28,12 @@
 </template>
 
 <script>
+import animatedInteger from "./animated-integer.vue";
 export default {
-  name: "HelloWorld",
+  name: "main",
+  components: {
+    animatedInteger
+  },
   mounted() {
     this.init();
   },
@@ -78,7 +83,8 @@ export default {
         2: 1,
         3: 2,
         4: 3
-      }
+      },
+      animateNum: 1
     };
   },
   methods: {
