@@ -103,9 +103,9 @@ export default {
     },
     handleStart() {
       this.status = !this.status;
-      this.intervalId = setInterval(function() {
-        this.animateNum = randomNum(1, this.count);
-      }, 1);
+      this.intervalId = setInterval(() => {
+        this.animateNum = randomNum(1, this.$route.params.count);
+      }, 500);
     },
     handlePause() {
       this.intervalId = null;
@@ -114,7 +114,6 @@ export default {
       this.lottery(this.count, this.num);
       this.allLocCount[this.value].push(...this.locCount);
       localStorage.setItem("allLocCount", JSON.stringify(this.allLocCount));
-      console.log(this.allLocCount);
     },
     /**
      * 抽奖函数 已抽中的人出栈 放到
