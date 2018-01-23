@@ -94,6 +94,7 @@ export default {
       initCls.call(this, this.value);
       this.lottery(this.count, this.num);
       this.allLocCount[this.value].push(...this.locCount);
+      localStorage.setItem("allLocCount", JSON.stringify(this.allLocCount));
       console.log(this.allLocCount);
     },
     /**

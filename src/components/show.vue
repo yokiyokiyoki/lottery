@@ -2,5 +2,12 @@
   <div class="show"></div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      allCount: {}
+    };
+  },
+  mounted() {}
+};
 </script>
