@@ -99,9 +99,13 @@ export default {
     },
     handleChange(value) {
       this.num = value;
-      // console.log(value);
     },
     handleStart() {
+      if (this.times[this.value] == 0) {
+        this.$message.error("不能再抽这个了~");
+        return;
+      }
+      this.times[this.value]--;
       this.status = !this.status;
       this.intervalId = setInterval(() => {
         this.animateNum = randomNum(1, this.$route.params.count);
@@ -219,8 +223,8 @@ function randomNum(minNum, maxNum) {
     margin: 50px 0px;
   }
   .content {
-    height: 200px;
-    width: 500px;
+    height: 600px;
+    width: 1000px;
     border: 10px solid #409eff;
     margin: 50px 0px;
     &.center {
@@ -230,34 +234,39 @@ function randomNum(minNum, maxNum) {
     }
     .num {
       &-30 {
-        height: 60px;
-        width: 50px;
-        display: inline-block;
-        line-height: 60px;
-      }
-      &-20 {
-        height: 100px;
-        width: 50px;
-        display: inline-block;
-        line-height: 100px;
-      }
-      &-5 {
-        height: 200px;
+        height: 180px;
         width: 100px;
         display: inline-block;
-        line-height: 200px;
+        line-height: 180px;
+        font-size: 30px;
       }
-      &-3 {
-        height: 200px;
-        width: 150px;
+      &-20 {
+        height: 300px;
+        width: 100px;
         display: inline-block;
-        line-height: 200px;
+        line-height: 300px;
+        font-size: 30px;
       }
-      &-1 {
-        height: 200px;
+      &-5 {
+        height: 600px;
         width: 200px;
         display: inline-block;
-        line-height: 200px;
+        line-height: 600px;
+        font-size: 40px;
+      }
+      &-3 {
+        height: 600px;
+        width: 300px;
+        display: inline-block;
+        line-height: 600px;
+        font-size: 40px;
+      }
+      &-1 {
+        height: 600px;
+        width: 400px;
+        display: inline-block;
+        line-height: 600px;
+        font-size: 60px;
       }
     }
   }
