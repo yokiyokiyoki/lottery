@@ -1,5 +1,7 @@
 <template>
-  <div class="show"></div>
+  <div class="show">
+      {{allcount}}
+  </div>
 </template>
 <script>
 export default {
@@ -8,6 +10,8 @@ export default {
       allCount: {}
     };
   },
-  mounted() {}
+  mounted() {
+    this.allCount = JSON.parse(localStorage.getItem("allLocCount"));
+  }
 };
 </script>
