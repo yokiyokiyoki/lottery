@@ -9,7 +9,7 @@
     </div>
     <div class="content center" v-show='!status'>
       <animated-integer :value="animateNum"></animated-integer>
-      <span>正在抽奖</span>  
+      <!-- <span>正在抽奖</span>   -->
     </div>
     <div class="footer">
       <el-select v-model="value" placeholder="请选择" >

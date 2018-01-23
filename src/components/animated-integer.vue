@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="font-size: 60px;">
       <span>{{ tweeningValue }}</span>
   </div>
 </template>
