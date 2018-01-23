@@ -19,7 +19,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-input-number v-model="num" @change="handleChange" :min="1" :max="maxNum" label="抽奖人数"></el-input-number>
+      <!-- <el-input-number v-model="num" @change="handleChange" :min="1" :max="maxNum" label="抽奖人数"></el-input-number> -->
       <el-button type="primary" plain @click='handleStart' v-if='status'>开始抽奖</el-button>
       <el-button type="primary" plain @click='handlePause' v-else>暂停抽奖...</el-button>
     </div>
@@ -92,7 +92,8 @@ export default {
       this.locCount = [];
     },
     handleChange(value) {
-      console.log(value);
+      this.num = value;
+      // console.log(value);
     },
     handleStart() {
       this.status = !this.status;
