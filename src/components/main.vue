@@ -80,7 +80,7 @@ export default {
       times: {
         0: 1,
         1: 1,
-        2: 1,
+        2: 2,
         3: 2,
         4: 3
       },
@@ -220,13 +220,15 @@ function randomNum(minNum, maxNum) {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .main {
+  background-image: url(../assets/pic.jpg);
+  background-repeat: no-repeat;
   .header {
     margin: 50px 0px;
   }
   .content {
     height: 600px;
-    width: 1000px;
-    border: 10px solid #409eff;
+    width: 1200px;
+    // border: 10px solid #409eff;
     margin: 50px 0px;
     &.center {
       display: flex;
@@ -236,14 +238,14 @@ function randomNum(minNum, maxNum) {
     .num {
       &-30 {
         height: 180px;
-        width: 100px;
+        width: 120px;
         display: inline-block;
         line-height: 180px;
         font-size: 30px;
       }
       &-20 {
         height: 300px;
-        width: 100px;
+        width: 120px;
         display: inline-block;
         line-height: 300px;
         font-size: 30px;
@@ -257,7 +259,7 @@ function randomNum(minNum, maxNum) {
       }
       &-3 {
         height: 600px;
-        width: 300px;
+        width: 400px;
         display: inline-block;
         line-height: 600px;
         font-size: 40px;
@@ -267,7 +269,7 @@ function randomNum(minNum, maxNum) {
         width: 400px;
         display: inline-block;
         line-height: 600px;
-        font-size: 60px;
+        font-size: 80px;
       }
     }
   }
