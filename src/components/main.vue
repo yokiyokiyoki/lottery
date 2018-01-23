@@ -8,7 +8,8 @@
       <span :class="numClass" v-for='(n, index) in locCount' :key='index'>{{n}}</span>
     </div>
     <div class="content center" v-show='!status'>
-      <span>正在抽奖</span>  
+      <animated-integer :value="animateNum"></animated-integer>
+      <!-- <span>正在抽奖</span>   -->
     </div>
     <div class="footer">
       <el-select v-model="value" placeholder="请选择" >
@@ -19,7 +20,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <el-input-number v-model="num" @change="handleChange" :min="1" :max="maxNum" label="抽奖人数"></el-input-number>
+      <!-- <el-input-number v-model="num" @change="handleChange" :min="1" :max="maxNum" label="抽奖人数"></el-input-number> -->
       <el-button type="primary" plain @click='handleStart' v-if='status'>开始抽奖</el-button>
       <el-button type="primary" plain @click='handlePause' v-else>暂停抽奖...</el-button>
     </div>
@@ -27,8 +28,11 @@
 </template>
 
 <script>
+import animatedInteger from "./animated-integer.vue";
 export default {
-  name: "HelloWorld",
+  components: {
+    animatedInteger
+  },
   mounted() {
     this.init();
   },
@@ -78,7 +82,9 @@ export default {
         2: 1,
         3: 2,
         4: 3
-      }
+      },
+      animateNum: 1,
+      intervalId: null
     };
   },
   methods: {
@@ -92,18 +98,22 @@ export default {
       this.locCount = [];
     },
     handleChange(value) {
-      console.log(value);
+      this.num = value;
+      // console.log(value);
     },
     handleStart() {
       this.status = !this.status;
+      this.intervalId = setInterval(() => {
+        this.animateNum = randomNum(1, this.$route.params.count);
+      }, 500);
     },
     handlePause() {
+      this.intervalId = null;
       this.status = !this.status;
       initCls.call(this, this.value);
       this.lottery(this.count, this.num);
       this.allLocCount[this.value].push(...this.locCount);
       localStorage.setItem("allLocCount", JSON.stringify(this.allLocCount));
-      console.log(this.allLocCount);
     },
     /**
      * 抽奖函数 已抽中的人出栈 放到
@@ -185,6 +195,19 @@ function initCls(val) {
     this.numClass = "num-20";
   } else {
     this.numClass = "num-30";
+  }
+}
+function randomNum(minNum, maxNum) {
+  switch (arguments.length) {
+    case 1:
+      return parseInt(Math.random() * minNum + 1, 10);
+      break;
+    case 2:
+      return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+      break;
+    default:
+      return 0;
+      break;
   }
 }
 </script>
