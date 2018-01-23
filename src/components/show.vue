@@ -1,7 +1,8 @@
 <template>
   <div class="show">
+      <h1>获奖一览</h1>
       <div v-for='(value,key,index) in allCount' :key='index'>
-          <h1>{{transform(key)}}等奖</h1>
+          <h2>{{transform(key)}}等奖</h2>
           <div class="box">
             <span v-for='i in value' :key='i'>{{i}}</span>
           </div>
@@ -32,17 +33,20 @@ export default {
   },
   mounted() {
     this.allCount = JSON.parse(localStorage.getItem("allLocCount"));
+    console.log(this.allCount);
   }
 };
 </script>
 <style lang="less" scoped>
-.box {
-  height: 400px;
-  width: 400px;
-  span {
-    height: 40px;
-    width: 40px;
-    display: inline-block;
+.show {
+  height: 800px;
+  .box {
+    width: 400px;
+    span {
+      height: 40px;
+      width: 40px;
+      display: inline-block;
+    }
   }
 }
 </style>
