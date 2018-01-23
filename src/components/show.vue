@@ -33,7 +33,6 @@ export default {
   },
   mounted() {
     this.allCount = JSON.parse(localStorage.getItem("allLocCount"));
-    console.log(this.allCount);
   }
 };
 </script>
