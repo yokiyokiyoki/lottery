@@ -1,6 +1,6 @@
 <template>
   <div class="show">
-      {{allcount}}
+      {{allCount}}
   </div>
 </template>
 <script>
