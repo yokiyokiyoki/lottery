@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    
+    <img src="~@/assets/bg.jpg" class="bg">
   </div>
 </template>
 
@@ -43,8 +43,13 @@ function randomNum(minNum, maxNum) {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .main {
-  .header {
-    margin: 50px 0px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .bg {
+    width: 100%;
   }
 }
 </style>
