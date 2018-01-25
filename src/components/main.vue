@@ -9,7 +9,7 @@
         <div class="box-content">
           <div class="lotteryShow" :class="showNumCls" v-if='!lotteryState'>
             <span v-for='n in lotteryArr' :key='n' class="showNum" >
-              <em>{{n}}</em>
+              <em><span>{{n}}</span></em>
             </span>
           </div>
           <div class="lotteryShow-ramdom" v-else>
@@ -241,19 +241,27 @@ function changeCls(num) {
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
           }
           &-40 {
             grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
             grid-template-rows: 25% 25% 25% 25%;
             em {
-              font-size: 30px;
+              font-size: 28px;
               font-style: normal;
               display: inline-block;
-              height: 80px;
-              width: 80px;
-              border-radius: 80px;
+              width: 70%;
+              height: 0;
+              padding-bottom: 70%;
+              border-radius: 50%;
               border: 1px solid white;
-              line-height: 80px;
+              position: relative;
+              span {
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                left: 50%;
+              }
             }
           }
           &-10 {
@@ -263,11 +271,18 @@ function changeCls(num) {
               font-size: 40px;
               font-style: normal;
               display: inline-block;
-              height: 160px;
-              width: 160px;
-              border-radius: 160px;
+              width: 70%;
+              height: 0;
+              padding-bottom: 70%;
+              border-radius: 50%;
               border: 5px solid white;
-              line-height: 160px;
+              position: relative;
+              span {
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                left: 50%;
+              }
             }
           }
           &-3 {
@@ -277,11 +292,18 @@ function changeCls(num) {
               font-size: 50px;
               font-style: normal;
               display: inline-block;
-              height: 260px;
-              width: 260px;
-              border-radius: 260px;
+              width: 70%;
+              height: 0;
+              padding-bottom: 70%;
+              border-radius: 50%;
               border: 5px solid white;
-              line-height: 260px;
+              position: relative;
+              span {
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                left: 50%;
+              }
             }
           }
           &-1 {
@@ -291,11 +313,18 @@ function changeCls(num) {
               font-size: 80px;
               font-style: normal;
               display: inline-block;
-              height: 360px;
-              width: 360px;
-              border-radius: 360px;
+              width: 30%;
+              height: 0;
+              padding-bottom: 30%;
+              border-radius: 50%;
               border: 10px solid white;
-              line-height: 360px;
+              position: relative;
+              span {
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                left: 50%;
+              }
             }
           }
         }
