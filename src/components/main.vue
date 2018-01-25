@@ -4,7 +4,7 @@
       <img src="~@/assets/logo.png" class="logo">
       <div class="box">
         <div class="box-header">
-          <h1>{{rankName}}等奖中奖名单</h1>
+          <h1 v-show='lotteryArr.length!=0'>{{rankName}}中奖名单</h1>
         </div>
         <div class="box-content">
           <div class="lotteryShow" :class="showNumCls" v-if='!lotteryState'>
@@ -47,7 +47,7 @@ export default {
   },
   data() {
     return {
-      rankName: "三",
+      rankName: "三等奖",
       selected: 3,
       count: 1, //抽奖总人数
       selectedList: [
@@ -91,22 +91,31 @@ export default {
       }
     },
     handleLottery() {
+      if (this.countArr.length <= 0) {
+        this.$message.error("无法抽取");
+        return;
+      }
+      let selected = this.selectedList.filter(item => {
+        return item.value == this.selected;
+      })[0];
+      this.rankName = selected.label;
       this.randomIntervalId = setInterval(() => {
         this.animatedNum = randomNum(1, this.countArr.length);
-      }, 200);
+      }, 500);
       this.lotteryState = !this.lotteryState;
     },
     handlePause() {
-      let num = this.selectedList.filter(item => {
+      let selected = this.selectedList.filter(item => {
         return item.value == this.selected;
-      })[0].count;
-      // this.showNumCls = changeCls(num);
-      // let temp = lottery(num, this.countArr);
-      // this.countArr = temp.countArr;
-      // this.lotteryArr = temp.lotteryArr;
-      // console.log(this.countArr, this.lottery);
-      console.log(num);
+      })[0];
+      let num = selected.count;
+      this.showNumCls = changeCls(num);
+      let temp = lottery(num, this.countArr);
+      this.countArr = temp.countArr;
+      this.lotteryArr = temp.lotteryArr;
+      console.log(this.countArr, this.lotteryArr);
       clearInterval(this.randomIntervalId);
+      this.randomIntervalId = null;
       this.lotteryState = !this.lotteryState;
     }
   }
@@ -215,30 +224,68 @@ function changeCls(num) {
             align-items: center;
             height: 100%;
           }
+          .showNum {
+            // border: 1px solid white;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
           &-40 {
             grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
             grid-template-rows: 25% 25% 25% 25%;
-            .showNum {
-              // border: 1px solid white;
-              font-weight: bold;
-              display: flex;
-              justify-content: center;
-              align-items: center;
+            em {
               font-size: 24px;
-              em {
-                font-style: normal;
-                display: inline-block;
-                height: 100px;
-                width: 100px;
-                border-radius: 50px;
-                border: 1px solid white;
-                line-height: 100px;
-              }
+              font-style: normal;
+              display: inline-block;
+              height: 100px;
+              width: 100px;
+              border-radius: 50px;
+              border: 1px solid white;
+              line-height: 100px;
             }
           }
           &-10 {
             grid-template-columns: 20% 20% 20% 20% 20%;
             grid-template-rows: 50% 50%;
+            em {
+              font-size: 30px;
+              font-style: normal;
+              display: inline-block;
+              height: 200px;
+              width: 200px;
+              border-radius: 200px;
+              border: 5px solid white;
+              line-height: 200px;
+            }
+          }
+          &-3 {
+            grid-template-columns: 33% 33% 33%;
+            grid-template-rows: 100%;
+            em {
+              font-size: 50px;
+              font-style: normal;
+              display: inline-block;
+              height: 300px;
+              width: 300px;
+              border-radius: 300px;
+              border: 5px solid white;
+              line-height: 300px;
+            }
+          }
+          &-1 {
+            grid-template-columns: 100%;
+            grid-template-rows: 100%;
+            em {
+              font-size: 70px;
+              font-style: normal;
+              display: inline-block;
+              height: 400px;
+              width: 400px;
+              border-radius: 400px;
+              border: 10px solid white;
+              line-height: 400px;
+            }
           }
         }
       }
