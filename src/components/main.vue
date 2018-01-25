@@ -241,6 +241,7 @@ function changeCls(num) {
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
           }
           &-40 {
             grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
@@ -251,7 +252,7 @@ function changeCls(num) {
               display: inline-block;
               height: 80px;
               width: 80px;
-              border-radius: 80px;
+              border-radius: 50%;
               border: 1px solid white;
               line-height: 80px;
             }
@@ -265,7 +266,7 @@ function changeCls(num) {
               display: inline-block;
               height: 160px;
               width: 160px;
-              border-radius: 160px;
+              border-radius: 50%;
               border: 5px solid white;
               line-height: 160px;
             }
@@ -279,7 +280,7 @@ function changeCls(num) {
               display: inline-block;
               height: 260px;
               width: 260px;
-              border-radius: 260px;
+              border-radius: 50%;
               border: 5px solid white;
               line-height: 260px;
             }
@@ -293,7 +294,7 @@ function changeCls(num) {
               display: inline-block;
               height: 360px;
               width: 360px;
-              border-radius: 360px;
+              border-radius: 50%;
               border: 10px solid white;
               line-height: 360px;
             }
