@@ -2,7 +2,7 @@
  * @Author: Yoki 
  * @Date: 2018-01-25 11:45:25 
  * @Last Modified by: Yoki
- * @Last Modified time: 2018-01-25 11:46:00
+ * @Last Modified time: 2018-01-25 11:59:08
  */
 <template>
   <div class="main">
@@ -13,7 +13,10 @@
           <h1>{{rankName}}等奖中奖名单</h1>
         </div>
         <div class="box-content">
-          1
+          <div class="lotteryShow" v-if='!lotteryState'>1</div>
+          <div class="lotteryShow" v-else>
+            <animated-integer :value='animatedNum'></animated-integer>
+          </div>
         </div>
         <div class="box-footer">
           <el-select v-model="selected" placeholder="请选择">
@@ -40,11 +43,14 @@ export default {
   components: {
     animatedInteger
   },
-  mounted() {},
+  mounted() {
+    this.count = this.$route.params.count;
+  },
   data() {
     return {
       rankName: "三",
       selected: 3,
+      count: 0, //抽奖总人数
       selectedList: [
         {
           label: "三等奖",
@@ -69,14 +75,21 @@ export default {
         }
       ],
       //是否正在抽奖
-      lotteryState: false
+      lotteryState: false,
+      randomIntervalId: null,
+      animatedNum: 1
     };
   },
   methods: {
     handleLottery() {
       this.lotteryState = !this.lotteryState;
+      this.randomIntervalId = setInterval(() => {
+        this.animatedNum = randomNum(1, this.count);
+        console.log(this.animatedNum);
+      }, 500);
     },
     handlePause() {
+      clearInterval(this.randomIntervalId);
       this.lotteryState = !this.lotteryState;
     }
   }
@@ -95,8 +108,12 @@ function randomNum(minNum, maxNum) {
   }
 }
 
-// num:所要抽取的随机数
-function lottery(num) {
+// num:所要抽取的随机数，
+// count:总人数
+// 每抽完一次要把抽过的去掉
+function lottery(num, count) {
+  let len = count.length,
+    isChooed = []; // 已选中的数组下标函数
   do {
     let rand = parseInt(Math.random() * len);
     if (isChooed.indexOf(rand) < 0) {
@@ -106,15 +123,17 @@ function lottery(num) {
 
   let loc = [],
     notC = [];
-  this.count.forEach((item, index) => {
+  count.forEach((item, index) => {
     if (isChooed.indexOf(index) >= 0) {
       loc.push(item);
     } else {
       notC.push(item);
     }
   });
-  this.locCount = loc;
-  this.count = notC;
+  return {
+    lottery: loc, //当前抽取的
+    count: notC //剩下的总数
+  };
 }
 </script>
 
