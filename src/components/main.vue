@@ -43,6 +43,7 @@ export default {
   },
   created() {
     this.count = this.$route.params.count;
+    this.initCount();
   },
   data() {
     return {
@@ -76,18 +77,35 @@ export default {
       lotteryState: false,
       randomIntervalId: null,
       animatedNum: 1,
-      showNumCls: "lotteryShow-40"
+      showNumCls: "lotteryShow-40",
+      //抽奖的数组
+      lotteryArr: [],
+      //总人数数组
+      countArr: []
     };
   },
   methods: {
+    initCount() {
+      for (let i = 1; i < this.count.length; i++) {
+        this.countArr.push(i);
+      }
+    },
     handleLottery() {
       this.randomIntervalId = setInterval(() => {
-        this.animatedNum = randomNum(this.animatedNum, this.count);
+        this.animatedNum = randomNum(this.animatedNum, this.countArr.length);
       }, 500);
       this.lotteryState = !this.lotteryState;
     },
     handlePause() {
-      clearInterval(this.randomIntervalId);
+      let num = this.selectedList.filter(item => {
+        return item.value == this.selected;
+      })[0].count;
+      this.showNumCls = changeCls(num);
+      let temp = lottery(num, this.countArr);
+      this.countArr = temp.countArr;
+      this.lotteryArr = temp.lotteryArr;
+      console.log(this.countArr, this.lottery);
+      this.clearInterval(this.randomIntervalId);
       this.lotteryState = !this.lotteryState;
     }
   }
@@ -107,7 +125,7 @@ function randomNum(minNum, maxNum) {
 }
 
 // num:所要抽取的随机数，
-// count:总人数
+// count:总人数数组
 // 每抽完一次要把抽过的去掉
 function lottery(num, count) {
   let len = count.length,
@@ -129,9 +147,20 @@ function lottery(num, count) {
     }
   });
   return {
-    lottery: loc, //当前抽取的
-    count: notC //剩下的总数
+    lotteryArr: loc, //当前抽取的
+    countArr: notC //剩下的总数
   };
+}
+function changeCls(num) {
+  if (num == 40) {
+    return "lotteryShow-40";
+  } else if (num == 10) {
+    return "lotteryShow-10";
+  } else if (num == 3) {
+    return "lotteryShow-3";
+  } else {
+    return "lotteryShow-1";
+  }
 }
 </script>
 
@@ -178,8 +207,8 @@ function lottery(num, count) {
         .lotteryShow {
           height: 100%;
           width: 100%;
+          display: grid;
           &-40 {
-            display: grid;
             grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
             grid-template-rows: 25% 25% 25% 25%;
             .showNum {
@@ -199,6 +228,10 @@ function lottery(num, count) {
                 line-height: 100px;
               }
             }
+          }
+          &-10 {
+            grid-template-columns: 20% 20% 20% 20% 20%;
+            grid-template-rows: 50% 50%;
           }
         }
       }
