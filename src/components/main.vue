@@ -86,26 +86,27 @@ export default {
   },
   methods: {
     initCount() {
-      for (let i = 1; i < this.count.length; i++) {
+      for (let i = 1; i <= this.count; i++) {
         this.countArr.push(i);
       }
     },
     handleLottery() {
       this.randomIntervalId = setInterval(() => {
-        this.animatedNum = randomNum(this.animatedNum, this.countArr.length);
-      }, 500);
+        this.animatedNum = randomNum(1, this.countArr.length);
+      }, 200);
       this.lotteryState = !this.lotteryState;
     },
     handlePause() {
       let num = this.selectedList.filter(item => {
         return item.value == this.selected;
       })[0].count;
-      this.showNumCls = changeCls(num);
-      let temp = lottery(num, this.countArr);
-      this.countArr = temp.countArr;
-      this.lotteryArr = temp.lotteryArr;
-      console.log(this.countArr, this.lottery);
-      this.clearInterval(this.randomIntervalId);
+      // this.showNumCls = changeCls(num);
+      // let temp = lottery(num, this.countArr);
+      // this.countArr = temp.countArr;
+      // this.lotteryArr = temp.lotteryArr;
+      // console.log(this.countArr, this.lottery);
+      console.log(num);
+      clearInterval(this.randomIntervalId);
       this.lotteryState = !this.lotteryState;
     }
   }
