@@ -105,7 +105,7 @@ export default {
       }
       this.rankName = selected.label;
       this.randomIntervalId = setInterval(() => {
-        this.animatedNum = randomNum(1, this.countArr.length);
+        this.animatedNum = randomNum(1, this.count);
       }, 500);
       this.lotteryState = !this.lotteryState;
     },
