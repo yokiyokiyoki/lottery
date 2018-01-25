@@ -19,7 +19,8 @@
             </el-option>
           </el-select>
           <div class="button">
-            <el-button type="primary">抽奖</el-button>
+            <el-button type="primary" v-if='!lotteryState' @click='handleLottery'>抽奖</el-button>
+            <el-button type="primary" v-else @click='handlePause'>停止</el-button>
           </div>
         </div>
       </div>
@@ -41,22 +42,37 @@ export default {
       selectedList: [
         {
           label: "三等奖",
-          value: 3
+          value: 3,
+          //所抽总数
+          count: 40
         },
         {
           label: "二等奖",
-          value: 2
+          value: 2,
+          count: 10
         },
         {
           label: "一等奖",
-          value: 1
+          value: 1,
+          count: 3
         },
         {
           label: "特等奖",
-          value: 0
+          value: 0,
+          count: 1
         }
-      ]
+      ],
+      //是否正在抽奖
+      lotteryState: false
     };
+  },
+  methods: {
+    handleLottery() {
+      this.lotteryState = !this.lotteryState;
+    },
+    handlePause() {
+      this.lotteryState = !this.lotteryState;
+    }
   }
 };
 function randomNum(minNum, maxNum) {
