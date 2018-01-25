@@ -1,3 +1,9 @@
+/*
+ * @Author: Yoki 
+ * @Date: 2018-01-25 11:45:25 
+ * @Last Modified by: Yoki
+ * @Last Modified time: 2018-01-25 11:46:00
+ */
 <template>
   <div class="main">
     <div class="content">
@@ -87,6 +93,28 @@ function randomNum(minNum, maxNum) {
       return 0;
       break;
   }
+}
+
+// num:所要抽取的随机数
+function lottery(num) {
+  do {
+    let rand = parseInt(Math.random() * len);
+    if (isChooed.indexOf(rand) < 0) {
+      isChooed.push(rand);
+    }
+  } while (isChooed.length != num);
+
+  let loc = [],
+    notC = [];
+  this.count.forEach((item, index) => {
+    if (isChooed.indexOf(index) >= 0) {
+      loc.push(item);
+    } else {
+      notC.push(item);
+    }
+  });
+  this.locCount = loc;
+  this.count = notC;
 }
 </script>
 
