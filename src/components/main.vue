@@ -246,28 +246,28 @@ function changeCls(num) {
             grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
             grid-template-rows: 25% 25% 25% 25%;
             em {
-              font-size: 24px;
+              font-size: 30px;
               font-style: normal;
               display: inline-block;
-              height: 100px;
-              width: 100px;
-              border-radius: 50px;
+              height: 80px;
+              width: 80px;
+              border-radius: 80px;
               border: 1px solid white;
-              line-height: 100px;
+              line-height: 80px;
             }
           }
           &-10 {
             grid-template-columns: 20% 20% 20% 20% 20%;
             grid-template-rows: 50% 50%;
             em {
-              font-size: 30px;
+              font-size: 40px;
               font-style: normal;
               display: inline-block;
-              height: 200px;
-              width: 200px;
-              border-radius: 200px;
+              height: 160px;
+              width: 160px;
+              border-radius: 160px;
               border: 5px solid white;
-              line-height: 200px;
+              line-height: 160px;
             }
           }
           &-3 {
@@ -277,25 +277,25 @@ function changeCls(num) {
               font-size: 50px;
               font-style: normal;
               display: inline-block;
-              height: 300px;
-              width: 300px;
-              border-radius: 300px;
+              height: 260px;
+              width: 260px;
+              border-radius: 260px;
               border: 5px solid white;
-              line-height: 300px;
+              line-height: 260px;
             }
           }
           &-1 {
             grid-template-columns: 100%;
             grid-template-rows: 100%;
             em {
-              font-size: 70px;
+              font-size: 80px;
               font-style: normal;
               display: inline-block;
-              height: 400px;
-              width: 400px;
-              border-radius: 400px;
+              height: 360px;
+              width: 360px;
+              border-radius: 360px;
               border: 10px solid white;
-              line-height: 400px;
+              line-height: 360px;
             }
           }
         }
