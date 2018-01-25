@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="content">
+    <div class="content" :style="{backgroundImage: 'url(' +bgImg + ')'}">
       <img src="~@/assets/logo.png" class="logo">
       <div class="box">
         <div class="box-header">
@@ -47,6 +47,7 @@ export default {
   },
   data() {
     return {
+      bgImg: require("../assets/bg.jpg"),
       rankName: "三等奖",
       selected: 3,
       count: 1, //抽奖总人数
@@ -195,7 +196,7 @@ function changeCls(num) {
   .content {
     width: 100%;
     height: 100%;
-    background: url("~@/assets/bg.jpg");
+    // background: url("~@/assets/bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
