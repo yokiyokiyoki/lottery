@@ -81,7 +81,11 @@ export default {
       //抽奖的数组
       lotteryArr: [],
       //总人数数组
-      countArr: []
+      countArr: [],
+      //抽取次数，每个只能抽一次，防止多抽
+      times: [1, 1, 1, 1],
+      //所有抽奖抽到的
+      allLocCount: []
     };
   },
   methods: {
@@ -91,13 +95,13 @@ export default {
       }
     },
     handleLottery() {
-      if (this.countArr.length <= 0) {
-        this.$message.error("无法抽取");
-        return;
-      }
       let selected = this.selectedList.filter(item => {
         return item.value == this.selected;
       })[0];
+      if (this.times[selected.value] <= 0) {
+        this.$message.error(`只能抽取一次${selected.label}`);
+        return;
+      }
       this.rankName = selected.label;
       this.randomIntervalId = setInterval(() => {
         this.animatedNum = randomNum(1, this.countArr.length);
@@ -108,12 +112,18 @@ export default {
       let selected = this.selectedList.filter(item => {
         return item.value == this.selected;
       })[0];
+      this.times[selected.value]--;
       let num = selected.count;
       this.showNumCls = changeCls(num);
       let temp = lottery(num, this.countArr);
       this.countArr = temp.countArr;
       this.lotteryArr = temp.lotteryArr;
-      console.log(this.countArr, this.lotteryArr);
+      this.allLocCount.push(this.lotteryArr);
+      console.log(this.countArr, this.lotteryArr, this.times, this.allLocCount);
+      //所有获奖存在本地
+      localStorage.setItem("allLocCount", JSON.stringify(this.allLocCount));
+      //未获奖的存在本地
+      localStorage.setItem("noLocCount", JSON.stringify(this.countArr));
       clearInterval(this.randomIntervalId);
       this.randomIntervalId = null;
       this.lotteryState = !this.lotteryState;

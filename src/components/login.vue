@@ -2,8 +2,8 @@
   <div class="login">
     <!-- <img src="@/assets/bg.jpg"> -->
     <div class="center">
-        <el-input v-model="count" placeholder="请输入总人数" class="input"/>
-        <el-button type="primary" plain @click.enter='handler'>确定抽奖总人数</el-button>
+        <el-input v-model="count" placeholder="请输入总人数" class="input" @keyup.native.enter="handler"/>
+        <el-button type="primary" plain @click='handler'>确定抽奖总人数</el-button>
     </div>
   </div>
 </template>
