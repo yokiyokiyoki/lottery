@@ -1,9 +1,3 @@
-/*
- * @Author: Yoki 
- * @Date: 2018-01-25 11:45:25 
- * @Last Modified by: Yoki
- * @Last Modified time: 2018-01-25 11:59:08
- */
 <template>
   <div class="main">
     <div class="content">
@@ -13,7 +7,11 @@
           <h1>{{rankName}}等奖中奖名单</h1>
         </div>
         <div class="box-content">
-          <div class="lotteryShow" v-if='!lotteryState'>1</div>
+          <div class="lotteryShow" :class="showNumCls" v-if='!lotteryState'>
+            <span v-for='n in 40' :key='n' class="showNum" >
+              <em>{{n}}</em>
+            </span>
+          </div>
           <div class="lotteryShow" v-else>
             <animated-integer :value='animatedNum'></animated-integer>
           </div>
@@ -43,14 +41,14 @@ export default {
   components: {
     animatedInteger
   },
-  mounted() {
+  created() {
     this.count = this.$route.params.count;
   },
   data() {
     return {
       rankName: "三",
       selected: 3,
-      count: 0, //抽奖总人数
+      count: 1, //抽奖总人数
       selectedList: [
         {
           label: "三等奖",
@@ -77,16 +75,16 @@ export default {
       //是否正在抽奖
       lotteryState: false,
       randomIntervalId: null,
-      animatedNum: 1
+      animatedNum: 1,
+      showNumCls: "lotteryShow-40"
     };
   },
   methods: {
     handleLottery() {
-      this.lotteryState = !this.lotteryState;
       this.randomIntervalId = setInterval(() => {
-        this.animatedNum = randomNum(1, this.count);
-        console.log(this.animatedNum);
+        this.animatedNum = randomNum(this.animatedNum, this.count);
       }, 500);
+      this.lotteryState = !this.lotteryState;
     },
     handlePause() {
       clearInterval(this.randomIntervalId);
@@ -172,6 +170,37 @@ function lottery(num, count) {
         color: #3a8ee6;
       }
       &-content {
+        position: absolute;
+        top: 100px;
+        right: 0px;
+        left: 0px;
+        bottom: 150px;
+        .lotteryShow {
+          height: 100%;
+          width: 100%;
+          &-40 {
+            display: grid;
+            grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+            grid-template-rows: 25% 25% 25% 25%;
+            .showNum {
+              // border: 1px solid white;
+              font-weight: bold;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 24px;
+              em {
+                font-style: normal;
+                display: inline-block;
+                height: 100px;
+                width: 100px;
+                border-radius: 50px;
+                border: 1px solid white;
+                line-height: 100px;
+              }
+            }
+          }
+        }
       }
       &-footer {
         position: absolute;
