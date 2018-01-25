@@ -8,11 +8,11 @@
         </div>
         <div class="box-content">
           <div class="lotteryShow" :class="showNumCls" v-if='!lotteryState'>
-            <span v-for='n in 40' :key='n' class="showNum" >
+            <span v-for='n in lotteryArr' :key='n' class="showNum" >
               <em>{{n}}</em>
             </span>
           </div>
-          <div class="lotteryShow" v-else>
+          <div class="lotteryShow-ramdom" v-else>
             <animated-integer :value='animatedNum'></animated-integer>
           </div>
         </div>
@@ -209,6 +209,12 @@ function changeCls(num) {
           height: 100%;
           width: 100%;
           display: grid;
+          &-ramdom {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+          }
           &-40 {
             grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
             grid-template-rows: 25% 25% 25% 25%;
