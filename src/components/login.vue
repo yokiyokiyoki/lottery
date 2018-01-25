@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     handler() {
-      if (this.count > 0 && this.count <= 137) {
+      if (this.count > 55 && this.count <= 137) {
         // 此处应传进去总数
         this.$router.push({ name: "Main", params: { count: this.count } });
       } else {
